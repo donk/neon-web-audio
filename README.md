@@ -1,3 +1,5 @@
+![A pretty slick picture](https://neon.pw/snappy.png)
+
 # Neon Audio Player
 Super minimal, super hip, super easy peasy to use.
 
@@ -89,8 +91,8 @@ Get or set the volume; Accepts a value between 0 and 1
 Get or set the color of a specific element. There are currently only 3 elements: "main", "wave", and "progress".
 - main is the background color for the playlist
 - wave is the background color of the waveform/frequency bar thing
-- progress is the color of the progress bar overlay
-setColor accepts any css-valid color value.
+- progress is the color of the progress bar overlay  
+**setColor accepts any css-valid color value.**
 
 
 **NeonAudio.setColor(object|colors)**  
