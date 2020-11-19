@@ -1,0 +1,369 @@
+<!--- !!WARNING!! Tons of inline css and generally bad ways of doing everything ahead.
+It's a demo page though, so it's okay.-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="nl-audio.css">
+    <script type="text/javascript" src="nl-audio.js"></script>
+
+    <title>Neon Audio Player - A handsome audio player, for handsome people</title>
+
+    <style>
+    	body{
+    		padding:0;margin:0;
+    		background-color:#91f2dc;
+        font-family:Arial, Helvetica, sans-serif;
+    	}
+      #my-super-good-songs{
+        width:60vw;
+        margin:30px auto 5px auto;
+        max-width:600px;
+      }
+
+      #listy li{
+        margin-top:20px;
+      }
+
+      #listy li p{
+        margin-top:5px;
+        margin-bottom:30px;
+        line-height:1.4em;
+      }
+      
+
+
+      #listy{
+        padding-left:0;
+        list-style:none;
+      }
+
+
+      .colorChanger label{
+        display:block;
+        font-size:0.9em;
+        font-weight:bold;
+        margin-top:10px;
+      }
+
+      .squish{
+        width:80vw;
+        max-width:800px;
+        margin:0 auto;
+        text-align:center;
+      }
+
+      #head{
+        margin-top:60px;
+      }
+
+
+      #head h2{
+        padding:0;
+        margin:0;
+        display:inline-block;
+      }
+
+      #disclaimers{
+        font-size:9px;
+        text-align:right;
+        position:fixed;
+        z-index:2;
+        right:5px;
+        bottom:5px;
+        pointer-events:none;
+      }
+      
+      #navvy{
+        position:fixed;
+        top:10px;
+        right:10px;
+      }
+
+      #navvy a{
+        display:inline-block;
+        height:32px;
+        width:32px;
+      }
+
+      #navvy img{
+        width:100%;height:100%;
+        opacity:0.5;
+        transition:opacity 0.3s;
+      }
+
+      #navvy:hover img{
+        opacity:1;
+      }
+
+      .codey-bits{
+        width:100%;
+        white-space:pre;  overflow: auto;
+        background-color:rgba(240,240,240,0.6);
+        border:1px solid rgba(0,0,0,0.1);
+        padding:3px;
+        overflow-y:hidden;
+        font-family:monospace;
+      }
+
+      .func{
+        font-weight:bold;
+        font-family:monospace;
+        font-size:20px;
+      }
+
+      @media screen and (max-width:800px){
+        body{
+          font-size:0.8em;
+        }
+        #head{
+          margin-top:20px;
+        }
+        #my-super-good-songs{
+          width:95vw;
+        }
+        .squish{
+          width:95vw;
+        }
+
+        .codey-bits{
+          font-size:0.9em;
+        }
+
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="navvy">
+      <a href="https://github.com/donk/neon-web-audio" target="_blank"><img src="https://neon.pw/github-logo.png"/></a>
+    </div>
+
+    <div id="head" class="squish">
+      <h1>Neon Audio Player</h1>
+      <h2>So hip and minimal, there isn't even a pause button<span style="font-size:18px;vertical-align:top;">*</span></h2>
+      
+    </div>
+
+	  <div id="my-super-good-songs">
+      <audio src="https://neon.pw/lofi.mp3" title="The Most Generic Lofi Song Ever"></audio>
+      <audio src="https://neon.pw/cat.mp3" title="A Cat Song"></audio>
+      <audio src="https://neon.pw/garageithink.ogg" title="Bad Garage Music"></audio>
+      <audio src="https://neon.pw/aliens.mp3" title="Aliens"></audio>
+      <audio src="https://neon.pw/splash.wav" title="Drink More Water"></audio>
+    </div>
+
+    <div class="squish" style="margin:5px auto;text-align:center;">
+      <div id="yuck" onclick="toggleHipness()" style="font-size:0.9em;cursor:pointer;margin-bottom:20px;">Click to show pause button and ruin the zen</div>
+      <h3 onclick="shuffleTheme()"style="text-decoration:underline;cursor:pointer;display:inline;">Click To Shuffle Theme</h3>
+      <p>or create your own below</p>
+    </div>
+    
+    <div class="squish" style="display:flex;justify-content:space-evenly;margin:0 auto;text-align:center;"> 
+      <div class="colorChanger" style="width:30%;">
+        <strong>Playlist Color</strong>
+        <input type="color" data-for="main" />
+        <label></label>
+      </div>
+      <div class="colorChanger" style="width:30%;">
+        <strong>Waveform Color</strong>
+        <input type="color" data-for="wave" />
+        <label></label>
+      </div>
+      <div class="colorChanger" style="width:30%;">
+        <strong>Progress Color</strong>
+        <input type="color" data-for="progress" />
+        <label></label>
+      </div>
+    </div>
+    <div class="squish" style="margin:20px auto;text-align:left;">
+      <div class="codey-bits">// Whoah, nice colors. Copy to use on your player
+
+let player = new NeonAudio('#my-player');
+player.colors = {main: <span id="cl-main">'#ffffff'</span>, wave: <span id="cl-wave">'#444444'</span>, progress: <span id="cl-progress">'#aaaaaa'</span>}
+player.init();</div>
+    </div>
+    <div style="background:#fefefe;padding:20px 0;padding-bottom:50px;margin-top:30px;box-shadow:-0px -15px 20px rgba(0,0,0,0.1);">
+      <div class="squish" style="padding:0;">
+        
+        <h3>
+          One of the easy peasy-est ways to put music on your website / blog / geocities
+          <span style="font-size:12px;vertical-align:top;">&dagger;</span> <!-- Whoah it's actually called a dagger; learn something new every day-->
+        </h3>
+
+        <div style="text-align:left;margin-top:50px;">
+          <h2 style="margin-bottom:5px;"><!--OwO-->What's this?</h2>
+          <div>
+            Neon Player is a lightweight library using vanilla javascript and css to make it easy to embed music on your website.
+            The minimal design lets it fit in a wide range of sizes and color schemes, and that's why it's so basic and not because
+            I have a very bland eye for design.
+            <br/><br/>
+            There's not meant to be a pause button, since volume sliders are pretty good at making sound stop. <strong>When the volume is turned all the way down the song pauses.</strong>
+            There is a play/pause button available, but I couldn't find a good way to implement it and keep things super boring and square. 
+            I highly recommend against using this, and regret mentioning it in the first place.<br/><br/>
+            If you want to view the source code and help make things better, you can <a href="https://github.com/donk/neon-web-audio" target="_blank">check it out on Github</a>
+          </div>
+        </div>
+
+        
+        <div style="text-align:left;margin-top:50px;">
+          <h2 style="margin-bottom:5px;">How to use</h2>
+          <div>
+            First you need to include the library in the <span class="codey-bits">&lt;head&gt;</span>. You can get the source from <a href="https://github.com/donk/neon-web-audio" target="_blank">Github</a>
+            , or use my 'CDN' with the minified versions. (Is this a bad idea? Probably, but my host says unlimted bandwidth, so.).
+            <div class="codey-bits" style="margin:10px 0 20px 0;">&lt;head&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://neon.pw/nl-audio.min.css&quot;&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;https://neon.pw/nl-audio.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;</div>
+           Create an element with <span class="codey-bits">&lt;audio&gt;</span> elements of your musics inside.
+           <div class="codey-bits" style="margin:10px 0 20px 0;">&lt;div id=&quot;playlist&quot;&gt;
+  &lt;audio src=&quot;https://neon.pw/lofi.mp3&quot; title=&quot;The Most Generic Lofi Song Ever&quot;&gt;&lt;/audio&gt;
+  &lt;audio src=&quot;https://neon.pw/splash.wav&quot; title=&quot;Drink More Water&quot;&gt;&lt;/audio&gt;
+&lt;/div&gt;</div>
+           Then create a new instance of NeonAudio and pass the selector for the element you created
+           <div class="codey-bits" style="margin:10px 0 20px 0;">let player = new NeonAudio('#playlist');</div>
+           To actually create the player, you need to call initialize it. Pass true if you want a not so pretty pause button
+           <div class="codey-bits" style="margin:10px 0 20px 0;">player.init();<br/><br/>// Or just: new NeonAudio('#playlist').init();</div>
+          </div>
+        </div>
+
+
+        <div style="text-align:left;margin-top:50px;">
+          <h3 style="margin-bottom:0px;">Most basic example</h3>
+          <div style="padding:5px 0;">Copy/Paste this into an html file and you've got yourself a music player!</div>
+  <!-- I wonder how terrible of an idea it is to do this?-->
+            <textarea rows="20" cols="100" class="codey-bits" wrap="soft" readonly><html>
+  <head>
+    <title>Me, the famous music person</title>
+    <link rel="stylesheet" href="https://neon.pw/nl-audio.min.css">
+    <script type="text/javascript" src="https://neon.pw/nl-audio.min.js"></script>
+  </head>
+  <body>
+    <div id="my-super-good-songs" style="max-width:600px;margin:200px auto;">
+      <!-- Replace the information in these audo tags with your own mp3/ogg/wav -->
+      <audio src="https://neon.pw/lofi.mp3" title="The Most Generic Lofi Song Ever"></audio>
+      <audio src="https://neon.pw/splash.wav" title="Drink More Water"></audio>
+    </div>
+    
+    <script>
+      let player = new NeonAudio('#my-super-good-songs').init(false);
+      // Change init(false) to init(true) if you want a pause button (ew)
+    </script>
+  </body>
+</html></textarea>
+      </div>
+    </div>
+
+    <div class="squish"> 
+      <div style="text-align:left;margin-top:50px;">
+        <h2 style="margin-bottom:0px;">Nitty Gritties</h2>
+        <div style="padding:5px 0;">
+          This library is pretty light at 22kb or 15kb minified, using regular ol' javascript.
+          It has some public functions, with more planned for the future. Those functions are:
+        </div>
+        <ul id="listy">
+          <li><div class="func">NeonAudio.init(bool|showPlay)</div>
+            <p>This kicks everything off, and needs to be called pretty much immediately. Never pass true to this function.</p>
+          </li>
+          <li><div class="func">NeonAudio.play(int|songID)</div>
+            <p>When a number is passed, it'll try to play the song based on position in the playlist. If nothing's passed, it resumes playing.</p>
+          </li>
+          <li><div class="func">NeonAudio.pause()</div>
+            <p>Pauses. This is triggered when the volume is set to 0.</p>
+          </li>
+          <li><div class="func">NeonAudio.playpause()</div>
+            <p>Mixing things up. This toggles play and pause, for a certain button that shouldn't be enabled.</p>
+          </li>
+          <li><div class="func">NeonAudio.next()</div>
+            <p>Plays the next song. I should probably make a prev() too.</p>
+          </li>
+          <li><div class="func">NeonAudio.getVolume()</br>NeonAudio.setVolume(float|volume)</div>
+            <p>Get or set the volume; Accepts a value between 0 and 1</p>
+          </li>
+          <li><div class="func">NeonAudio.getColor(string|key)<br/>NeonAudio.setColor(string|key, string|color)</div>
+            <p>Get or set the color of a specific element. There are currently only 3 elements: "main", "wave", and "progress". <br/>
+            - <strong>main</strong> is the background color for the playlist<br/>
+            - <strong>wave</strong> is the background color of the waveform/frequency bar thing<br/>
+            - <strong>progress</strong> is the color of the progress bar overlay<br/>
+            <strong style="font-size:0.9em;">setColor accepts any css-valid color value.</strong></p>
+          </li>
+          <li><div class="func">NeonAudio.setColor(object|colors)</div>
+            <p>You can also set the color by passing an object with the above keys paired with a color string</br>
+            eg. {main:'#eee',wave:'#444',progress:'#aaa'}</p>
+          </li>
+          <li><div class="func">NeonAudio.showPause(bool|false)</div>
+            <p>If you reallly feel like breaking away from the <em>a e s t h e t i c</em> you can pass true to this.</p>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div id="disclaimers">
+      <div>* You can enable a pause button, but what's the fun in that?</div>
+      <div>&dagger; Remember geocities?</div>
+    </div>
+  </body>
+<script>
+  let player = new NeonAudio('#my-super-good-songs').init(false,true); // no play btn, demo mode
+
+  let isHip = true;
+
+  function shuffleTheme(){
+    player.randomTheme();
+  }
+
+  function toggleHipness(){
+    let yuck = document.getElementById('yuck');
+    player.showPause(isHip);
+    if (!isHip){
+      yuck.innerText = "Click to show pause button and ruin the zen";
+    }else{
+      yuck.innerText = "Click to remove eyesores and restore balance";
+    }
+    isHip = !isHip;
+  }
+
+  document.querySelectorAll('input[type=color]').forEach((colorPicker) => {
+    let key = colorPicker.dataset.for;
+    colorPicker.value = player.getColor(key);
+    colorPicker.parentElement.querySelector('label').innerText = colorPicker.value;
+    document.querySelector('#cl-'+key).innerText = "'"+colorPicker.value+"'";
+      document.querySelector('#cl-'+key).style.backgroundColor = colorPicker.value;
+      document.querySelector('#cl-'+key).style.color = getContrast(hex2rgb(colorPicker.value));
+    colorPicker.addEventListener('input',(e) => {
+      player.setColor(key,e.target.value);
+      e.target.parentElement.querySelector('label').innerText = e.target.value;
+      document.querySelector('#cl-'+key).innerText = "'"+e.target.value+"'";
+      document.querySelector('#cl-'+key).style.backgroundColor = e.target.value;
+      document.querySelector('#cl-'+key).style.color = getContrast(hex2rgb(e.target.value));
+    });
+  });
+
+  function hex2rgb(hex){
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+
+  function getContrast(color){
+    const [r, g, b] = Object.keys(color).map(key => {
+        const channel = color[key] / 255
+        return channel <= 0.03928
+          ? channel / 12.92
+          : ((channel + 0.055) / 1.055) ** 2.4
+      })
+      if (parseFloat((0.2126 * r + 0.7152 * g + 0.0722 * b).toFixed(3)) > Math.sqrt(1.05 * 0.05) - 0.05){
+        return('#000000');
+      } else {
+        return ('#ffffff');
+      }
+  }
+
+</script>
+</html>
