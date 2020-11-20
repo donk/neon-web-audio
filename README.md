@@ -1,4 +1,4 @@
-![A pretty slick picture](https://neon.pw/snappy.png)
+![A pretty slick jif](https://neon.pw/jif.gif)
 
 # Neon Audio Player
 Super minimal, super hip, super easy peasy to use.
