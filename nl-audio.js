@@ -51,7 +51,7 @@ class NeonAudio {
       }
     }
     // Create the main audio that will play all the songs. This should be more efficient, right?
-    this.targetEl.classList.add('NLAudio');
+    this.targetEl.classList.add('NeonAudio');
     this.audioElement.crossOrigin = 'anonymous';
     this.audioElement.addEventListener('ended', (e) => {
       this.next();
@@ -115,11 +115,19 @@ class NeonAudio {
     this._refreshColors();
   }
 
-  next(){;
+  next(){
     if (this.currentSong < this.songs.length-1){
       this.play((this.currentSong)+1);
     }else{
       this.play(0);
+    }
+  }
+
+  prev(){
+    if (this.currentSong == 0){
+      this.play(this.songs.length-1);
+    }else{
+      this.play(this.currentSong-1);
     }
   }
 
@@ -365,10 +373,12 @@ class NeonAudio {
 
     // It would be very cool if you kept this, but I won't cry if you don't <3
     let watermarkOrWhateverYoudCallThis = document.createElement('div');
-    watermarkOrWhateverYoudCallThis.style.float = "right";
+    watermarkOrWhateverYoudCallThis.style.position = "absolute";
+    watermarkOrWhateverYoudCallThis.style.bottom = "2px";
+    watermarkOrWhateverYoudCallThis.style.right = "10px";
     watermarkOrWhateverYoudCallThis.style.opacity = 0.3;
     watermarkOrWhateverYoudCallThis.style.fontSize = '0.6em';
-    watermarkOrWhateverYoudCallThis.innerHTML = 'NLAudio v'+this.version+' - <a target="_blank" style="color:inherit;text-decoration:none;"href="https://www.notlikely.me">www.notlikely.me</a>';
+    watermarkOrWhateverYoudCallThis.innerHTML = 'NeonAudio v'+this.version+' - <a target="_blank" style="color:inherit;text-decoration:none;"href="https://www.notlikely.me">www.notlikely.me</a>';
 
     controls.appendChild(volume);
     controls.appendChild(watermarkOrWhateverYoudCallThis);
@@ -389,7 +399,7 @@ class NeonAudio {
   }
 
   _clearPlaying(){
-    let playing = document.querySelector('.NLAudio ul.playlist li.now-playing');
+    let playing = document.querySelector('.NeonAudio ul.playlist li.now-playing');
     if (playing) playing.classList.remove('now-playing');
   }
   

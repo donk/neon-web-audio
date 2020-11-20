@@ -96,7 +96,7 @@ input[type=color]{
 
 
 
-.NLAudio{
+.NeonAudio{
   font-size:13px;
   padding:5px;
   position:relative;
@@ -104,18 +104,19 @@ input[type=color]{
   font-family:Arial, Helvetica, sans-serif;
 }
 
-.NLAudio canvas{
+.NeonAudio canvas{
   width:100%;
   position:relative;
   z-index:2;
   cursor:text;
 }
 
-.NLAudio .seeker{
+.NeonAudio .seeker{
   z-index:1;
+  width:100%;
 }
 
-.NLAudio .scrubber{
+.NeonAudio .scrubber{
   width:100%;
   background-color:rgba(0,0,0,0.8);
   position:relative;
@@ -123,11 +124,11 @@ input[type=color]{
   z-index:1;
 }
 
-.NLAudio.playing .scrubber{
+.NeonAudio.playing .scrubber{
   border-radius:0;
 }
 
-.NLAudio .progress{
+.NeonAudio .progress{
   position:absolute;
   left:0;top:0;
   height:100%;
@@ -136,33 +137,33 @@ input[type=color]{
   overflow:hidden;
 }
 
-.NLAudio .controls{
+.NeonAudio .controls{
   padding:5px;
 }
 
 
-.NLAudio .pause svg{
+.NeonAudio .pause svg{
   width:15px;
   height:15px;
 }
 
-.NLAudio .album{
+.NeonAudio .album{
   background-color:rgba(255,0,0,0.3);
   flex-shrink:0;
   background-size:cover;
   background-position:center;
 }
 
-.NLAudio .current-time, .NLAudio .total-time{
+.NeonAudio .current-time, .NeonAudio .total-time{
   margin:0 10px;
   font-size:14px;
 }
 
-.NLAudio.seeking .scrubber .current-time{
+.NeonAudio.seeking .scrubber .current-time{
   position:absolute;
 }
 
-.NLAudio ul.playlist{
+.NeonAudio ul.playlist{
   margin:0;
   padding:0;
   background-color:rgba(255,255,255,1);
@@ -172,19 +173,19 @@ input[type=color]{
   position:relative;
 }
 
-.NLAudio.playing ul.playlist{
+.NeonAudio.playing ul.playlist{
   border-top-left-radius:0px;
   border-top-right-radius:0px;
 }
 
-.NLAudio ul.playlist li{
+.NeonAudio ul.playlist li{
   list-style:none;
   padding:7px 10px 7px 10px;
   position:relative;
   transition:background-color 0.3s ease-in-out;
 }
 
-.NLAudio ul.playlist li:after{
+.NeonAudio ul.playlist li:after{
   content:'';
   height:1px;
   width:90%;
@@ -194,19 +195,19 @@ input[type=color]{
   left:5%;
 }
 
-.NLAudio ul.playlist li:last-child:after{
+.NeonAudio ul.playlist li:last-child:after{
   display:none;
 }
 
-.NLAudio ul.playlist li.now-playing{
+.NeonAudio ul.playlist li.now-playing{
   background-color:rgba(0,0,0,0.12);
 }
 
-.NLAudio.normal ul.playlist li .pause{
+.NeonAudio.normal ul.playlist li .pause{
   display:none !important; /* !important !important !important !important !important ; */
 }
 
-.NLAudio.abnormal ul.playlist li .pause{
+.NeonAudio.abnormal ul.playlist li .pause{
   position:absolute;
   padding:8px;
   top:0px;
@@ -219,36 +220,39 @@ input[type=color]{
   box-shadow:0px 4px 5px 1px rgba(0,0,0,0.2);
 }
 
-.NLAudio.abnormal ul.playlist li.now-playing .pause{
+.NeonAudio.abnormal ul.playlist li.now-playing .pause{
   left:-40px;
 }
 
 
 
 
-.NLAudio ul.playlist li:hover{
+.NeonAudio ul.playlist li:hover{
   cursor:pointer;
   background-color:rgba(0,0,0,0.1);
 }
 
-.NLAudio ul.playlist li .song-duration{
+.NeonAudio ul.playlist li .song-duration{
   float:right;
   pointer-events:none;
 }
 
-.NLAudio ul.playlist li .song-title{
+.NeonAudio ul.playlist li .song-title{
   pointer-events:none;
 }
 
 
 @media screen and (max-width:800px){
- .NLAudio{
+ .NeonAudio{
     padding:0;
     font-size:11px;
   }
-  .NLAudio ul.playlist li{
+  .NeonAudio ul.playlist li{
     padding-top:10px;
     padding-bottom:10px;
     font-size:13px;
+  }
+  .NeonAudio .controls{
+    padding:15px;
   }
 }
